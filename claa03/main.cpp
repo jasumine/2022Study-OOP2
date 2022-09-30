@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Dog.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -24,7 +25,9 @@ int main()
 // 
 	// Dog happy = Dog("happy", 4, 3); 생성자 + 복사 생성자
 	// Dog happy("happy", 4, 3);
-	Dog *happy = new Dog("happy", 4, 3); 
+	Pet *happy = new Dog("happy", 4, 3); 
+	// 원래 dog가 생성자가 호출되지만, dog는 pet을 생성해서 pet이 먼저 생성되서 pet이 먼저 호출되고,
+	// 이후 dog함수가 종료되면서 dog생성자도 호출한다.
 	// Dog another_happy(happy); // 복사생성자
 	// 
 	// 	Pet *happy = new Dog("happy", 4, 3);  이렇게 바꾸면 happy는 그냥 pet이라서 dog의 bark를 쓸 수 없음.
@@ -43,7 +46,7 @@ int main()
 
 	Pet* pet = happy;
 
-	happy->bark();
+	// happy->bark();
 	happy->eat();
 	happy->sleep();
 
@@ -56,6 +59,11 @@ int main()
 	(static_cast<Dog*>(pet))->bark(); // pet이라는 포인터를 dog라는 포인터로 바꿔주세요
 	// 이렇게 바꾸는게 안전하다.
 
+	delete happy; 
+	// happy는 Pet의 포인터여서 happy 소멸자가 호출된다. 
+	// 하지만, 원래 만들어진 것은 dog여서 
+	// delete (static_cast<Dog*>(happy)); 다운 캐스팅을 해서 dog소멸자를 호출한다.
+	// 아니면 virtual를 pet소멸자에 작성해서 dog소멸자를 호출한다.
 
 	return 0;
 }

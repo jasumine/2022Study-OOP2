@@ -11,7 +11,10 @@ class Pet
 
 public:
 	//const string& name
-	Pet(const char *name = "unnamed", int age = 0) :name(name), age(age) {}
+	Pet(const char *name = "unnamed", int age = 0) :name(name), age(age) 
+	{
+		cout << "Pet constructor" << endl;
+	}
 	// const char *name
 	/*
 	Pet("happy",5);
@@ -20,11 +23,14 @@ public:
 	Pet(5); (X)
 	*/
 
-	virtual ~Pet() {}
+	virtual ~Pet() 
+	{
+		cout << "Pet destructor" << endl;
+	}
 
 	string getName() { return name; }
 	int getAge() { return age; }
-	void sleep() { cout << "sleep" << endl; }
+	virtual void sleep() { cout << "sleep" << endl; }
 	void eat() { cout << "eat" << endl; }
 
 
