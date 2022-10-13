@@ -8,6 +8,7 @@ class Player :
 public:
     Player(int x, int y) : GameObject('>', x, y) {}
 
+
 	void processInput()
 	{
 		char key;
