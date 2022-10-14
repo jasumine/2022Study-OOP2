@@ -10,6 +10,7 @@
 #include "Screen.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "GameManager.h"
 
 // #include <vector>
 
@@ -47,71 +48,63 @@ using namespace std;
 
 int main()
 {
-Screen screen(15, 15); // 화면의 크기
+	GameManager gameManager;
+	Screen screen(15, 15); // 화면의 크기
+	Player player{ 2, 4, screen }; 
+	// ennemy 10개 랜덤 생성
+	Enemy* enemy[10];
+	srand(time(NULL));
+	int x = rand() % 9 + 1;
+	int y = rand() % 9 + 1;
+	for (int i = 0; i < 10; i++)
+	{
+		enemy[i] = new Enemy(x, y, screen);
+	}
+	int enemyCount = 10;
 
-Player player{ 2, 4, screen }; 
-Enemy enemy1{ rand() % 15, rand() % 15 , screen };
+	cout << "WASD -  이동" << endl;
+	cout << "R - 클릭" << endl;
+	cout << "F - 깃발(#)" << endl;
+	cout << "Q - 게임 종료" << endl;
+	cout << "> - 현재 위치 표시" << endl;
 
-
-/*ennemy 10개 랜덤 생성
-Enemy* enemy[10];
-srand(time(NULL));
-int x = rand() % 9 + 1;
-int y = rand() % 9 + 1;
-for (int i = 0; i < 10; i++)
-{
-	enemy[i] = new Enemy(x, y, screen);
-}
-int enemyCount = 10;
-
-cout << "WASD -  이동" << endl;
-cout << "R - 클릭" << endl;
-cout << "F - 깃발(#)" << endl;
-cout << "Q - 게임 종료" << endl;
-cout << "> - 현재 위치 표시" << endl;
-
-*/
 while (1)
 {
+	cout << "지뢰 개수 : " << enemyCount << endl;
 	screen.clear(); // 화면 초기화
 
 	screen.draw(player.getPos(), player.getShape()); // player 위치
-	screen.draw(enemy1.getPos(), enemy1.getShape());
 
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	screen.draw(enemy[i]->getPos(), enemy[i]->getShape()); // enemy 위치
-	//}
-
-	screen.render(); // 
+	for (int i = 0; i < 10; i++)
+	{
+		screen.draw(enemy[i]->getPos(), enemy[i]->getShape()); // enemy 위치
+	}
+	screen.render(); 
 
 	player.update();
-	enemy1.update();
 
-	/*
-	char key = NULL;
-	 ============= 위치 비교 함수 ============
+	char key = NULL; 
+	// ============= 위치 비교 함수 ============
 	if (key == 'r')
 	{
-	set pos 를 써서 넣기 ?
-		if (player.getPos() == enemy->getPos())
+		if (gameManager.comparePos(player.getPos(), enemy[i]->getPos(), ))
 			return 0;
 		else
-		============ 재귀함수 =============
-		screen.draw(player.getPos(), 'X');
 	}
 
-	if (key == 'f')
-	{
-		screen.draw(player.getPos(), '#');
-		enemyCount --;
-	}
+	//if (key == 'f')
+	//{
+	//	if (gameManager.comparePos(player.getPos(), enemy[i]->getPos(), ))
+	//	{
+	//		screen.draw(player.getPos(), '#');
+	//		enemyCount--;
+	//	}
+	//}
 
-	if(enemyCount == 0, 재귀함수 -> 0 일 경우)
-	 cout << " VICTORY " << endl;
-	 return 0;
+	//if(enemyCount == 0, 재귀함수 -> 0 일 경우)
+	// cout << " VICTORY " << endl;
+	// return 0;
 
-	*/
 
 	/* 제일 이상적인 것
 	Screen screen(20, 81);

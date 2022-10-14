@@ -40,17 +40,17 @@ public:
 
 	void render()
 	{
-		Borland::GotoXY(0,5);
+		Borland::GotoXY(0,6);
 		for (int i = 0; i < n_rows; i++)
 		{
 			lines[i * n_cols + n_rows - 1] = '\n';
 		}
 		lines[n_rows * n_cols] = '\0';
-
-		// cout << "─────────────" << endl;
+		
+		cout << "─────────────────" << endl;
 		printf("%s", lines);
 		Sleep(100); // 0.1초 
-		// cout << "─────────────" << endl;
+		cout << "─────────────────" << endl;
 	}
 
 	bool checkValidPos(const Position& pos) const
