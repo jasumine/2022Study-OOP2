@@ -45,8 +45,10 @@ public:
 
 	void render()
 	{
-		Borland::GotoXY(0, 0);
+		Borland::GotoXY(0,5);
+		cout << "─────────────" << endl;
 		printf("%s", lines);
+		Sleep(1000); // 1초 
 	}
 };
 

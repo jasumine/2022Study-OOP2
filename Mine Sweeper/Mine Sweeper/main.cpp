@@ -15,6 +15,7 @@
 using namespace std;
 
 /// <summary>
+///  *** 어떤걸 public으로 둘지 private를 둘지 주의깊게 생각하기 ***
 /// 구현해야할 기능
 /// 1. 그리드(격자무늬 구분하기)
 /// 4. 깃발 표시 ( F 누를시 player position에 출력 + F 다시 누르면 깃발 없어지게 하기)
@@ -43,9 +44,9 @@ using namespace std;
 int main()
 {
 	Player player{ 2, 4 }; // player 커서 위치 (움직임)
-
+	Enemy enemy{ 5, 7 };
 	// ennemy 10개 랜덤 생성
-	Enemy* enemy[10];
+	/*Enemy* enemy[10];
 	srand(time(NULL));
 	int x = rand() % 9 + 1;
 	int y = rand() % 9 + 1;
@@ -53,29 +54,31 @@ int main()
 	{
 		enemy[i] = new Enemy(x, y);
 	}
-	int enemyCount = 10;
+	int enemyCount = 10;*/
 
-	Screen screen(10, 10); // 화면의 크기
+	Screen screen(20, 20); // 화면의 크기
 
-	cout << "             WASD -  이동" << endl;
-	cout << "             R - 클릭" << endl;
-	cout << "             F - 깃발(7)" << endl;
-	cout << "             > - 현재 위치 표시" << endl;
+	cout << "WASD -  이동" << endl;
+	cout << "R - 클릭" << endl;
+	cout << "F - 깃발(#)" << endl;
+	cout << "> - 현재 위치 표시" << endl;
 
-	
 	while (1)
 	{
 		screen.clear(); // 화면 초기화
 		
 		screen.draw(player.getPos(), player.getShape()); // player 위치
-		for (int i = 0; i < 10; i++)
-		{
-			screen.draw(enemy[i]->getPos(), enemy[i]->getShape()); // enemy 위치
-		}
+		screen.draw(enemy.getPos(), enemy.getShape());
+		//for (int i = 0; i < 10; i++)
+		//{
+		//	screen.draw(enemy[i]->getPos(), enemy[i]->getShape()); // enemy 위치
+		//}
 
 		screen.render(); // 
 
-		player.processInput(); // 움직임 구현
+		player.update();
+		enemy.update();
+
 
 		char key = NULL;
 		/* ============= 위치 비교 함수 ============

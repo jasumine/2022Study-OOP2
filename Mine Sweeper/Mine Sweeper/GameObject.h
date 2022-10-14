@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>	
+#include <conio.h>
 #include "Utils.h"
 
 using namespace std;
@@ -29,6 +30,8 @@ public:
 	void setPos(const Position& pos) { this->pos.x = pos.x, this->pos.y = pos.y; }
 
 	char getShape() const { return shape[0]; }
+
+	virtual void update() {}
 
 };
 
