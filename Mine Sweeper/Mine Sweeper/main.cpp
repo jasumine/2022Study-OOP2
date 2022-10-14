@@ -11,11 +11,15 @@
 #include "Player.h"
 #include "Enemy.h"
 
+// #include <vector>
 
 using namespace std;
 
 /// <summary>
-///  *** 어떤걸 public으로 둘지 private를 둘지 주의깊게 생각하기 ***
+/// *** 어떤걸 public으로 둘지 private를 둘지 주의깊게 생각하기 ***
+/// *** 어떤 class가 무슨 기능을 하는지 명확하게 설정하기 ***
+/// *** 코드를 최대한 보기쉽게 작성하기(코드 줄이기, 줄맞추기) ***
+/// *** 하나하나 순서대로 하기 ***
 /// 구현해야할 기능
 /// 1. 그리드(격자무늬 구분하기)
 /// 4. 깃발 표시 ( F 누를시 player position에 출력 + F 다시 누르면 깃발 없어지게 하기)
@@ -43,67 +47,98 @@ using namespace std;
 
 int main()
 {
-	Player player{ 2, 4 }; // player 커서 위치 (움직임)
-	Enemy enemy{ 5, 7 };
-	// ennemy 10개 랜덤 생성
-	/*Enemy* enemy[10];
-	srand(time(NULL));
-	int x = rand() % 9 + 1;
-	int y = rand() % 9 + 1;
-	for (int i = 0; i < 10; i++)
+Screen screen(15, 15); // 화면의 크기
+
+Player player{ 2, 4, screen }; 
+Enemy enemy1{ rand() % 15, rand() % 15 , screen };
+
+
+/*ennemy 10개 랜덤 생성
+Enemy* enemy[10];
+srand(time(NULL));
+int x = rand() % 9 + 1;
+int y = rand() % 9 + 1;
+for (int i = 0; i < 10; i++)
+{
+	enemy[i] = new Enemy(x, y, screen);
+}
+int enemyCount = 10;
+
+cout << "WASD -  이동" << endl;
+cout << "R - 클릭" << endl;
+cout << "F - 깃발(#)" << endl;
+cout << "Q - 게임 종료" << endl;
+cout << "> - 현재 위치 표시" << endl;
+
+*/
+while (1)
+{
+	screen.clear(); // 화면 초기화
+
+	screen.draw(player.getPos(), player.getShape()); // player 위치
+	screen.draw(enemy1.getPos(), enemy1.getShape());
+
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	screen.draw(enemy[i]->getPos(), enemy[i]->getShape()); // enemy 위치
+	//}
+
+	screen.render(); // 
+
+	player.update();
+	enemy1.update();
+
+	/*
+	char key = NULL;
+	 ============= 위치 비교 함수 ============
+	if (key == 'r')
 	{
-		enemy[i] = new Enemy(x, y);
+	set pos 를 써서 넣기 ?
+		if (player.getPos() == enemy->getPos())
+			return 0;
+		else
+		============ 재귀함수 =============
+		screen.draw(player.getPos(), 'X');
 	}
-	int enemyCount = 10;*/
 
-	Screen screen(20, 20); // 화면의 크기
+	if (key == 'f')
+	{
+		screen.draw(player.getPos(), '#');
+		enemyCount --;
+	}
 
-	cout << "WASD -  이동" << endl;
-	cout << "R - 클릭" << endl;
-	cout << "F - 깃발(#)" << endl;
-	cout << "> - 현재 위치 표시" << endl;
+	if(enemyCount == 0, 재귀함수 -> 0 일 경우)
+	 cout << " VICTORY " << endl;
+	 return 0;
+
+	*/
+
+	/* 제일 이상적인 것
+	Screen screen(20, 81);
+
+	vector<GameObject*> obj;
+
+	objs.push_back(new Player(2, 4, screen));
+
+	int maxCount = 5 * 10;
+	int cout = 0;
 
 	while (1)
 	{
-		screen.clear(); // 화면 초기화
-		
-		screen.draw(player.getPos(), player.getShape()); // player 위치
-		screen.draw(enemy.getPos(), enemy.getShape());
-		//for (int i = 0; i < 10; i++)
-		//{
-		//	screen.draw(enemy[i]->getPos(), enemy[i]->getShape()); // enemy 위치
-		//}
+		screen.clear();
+		for (auto obj : objs)
+			screen.draw(obj->getPos(), obj->getShape());
 
-		screen.render(); // 
-
-		player.update();
-		enemy.update();
-
-
-		char key = NULL;
-		/* ============= 위치 비교 함수 ============
-		if (key == 'r')
+		screen.render();
+		if (count++ == maxCount)
 		{
-			if (player.getPos() == enemy->getPos())
-				return 0;
-			else
-			============ 재귀함수 =============
-			screen.draw(player.getPos(), 'X');
+			count = 0;
+			objs.push_back(new Enemy(rand() % 80, rand() % 20, screen));
 		}
+		for (auto obj : objs)
+			obj->update();
+	}*/
+}
 
-		if (key == 'f')
-		{
-			screen.draw(player.getPos(), '#');
-			enemyCount --;
-		}
-
-		if(enemyCount == 0, 재귀함수 -> 0 일 경우)
-		 cout << " VICTORY " << endl;
-		 return 0;
-
-		*/
-		
-	}
-
-	return 0;
+return 0;
 }

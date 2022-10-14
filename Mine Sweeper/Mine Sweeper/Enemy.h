@@ -1,18 +1,13 @@
 #pragma once
+#include <conio.h>
 #include "GameObject.h"
 
 
 class Enemy :
     public GameObject
 {
-    int enemyNumber = 0;
-    const int MAX_enemyNumber = 10;
-    int array[10];
 
-public:
-    Enemy(int x, int y) :GameObject('*', x, y) { }
-
-    void update() override
+    void walkRandomly ()
     {
         Position pos = getPos();
         
@@ -46,8 +41,47 @@ public:
             pos.x++; pos.y++;
             break;
         }
-
         setPos(pos);
+
+    }
+
+    void processInput()
+    {
+        char key;
+
+        if (!_kbhit()) return; // 입력이 없으면 아무것도 하지 않겠다.
+
+        Borland::GotoXY(0, 21);
+        key = _getch();
+
+        Borland::GotoXY(1, 23);
+        printf("\nenemy key is %c %d\n", key, key);
+
+        Position pos = getPos();
+        /*
+        switch (key)
+        {
+        case 'w':
+            pos.y--;
+            break;
+        case 'a':
+            pos.x--;
+            break;
+        case 's':
+            pos.y++;
+            break;
+        case 'd':
+            pos.x++;
+            break;
+        }*/
+        setPos(pos);
+    }
+public:
+    Enemy(int x, int y, Screen &screen) :GameObject('*', x, y, screen) { }
+
+    void update() override
+    {
+       processInput();
     }
 
 };
