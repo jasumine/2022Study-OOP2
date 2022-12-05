@@ -1,0 +1,8 @@
+﻿  GameObject.cpp
+  Player.cpp
+C:\Users\B409_7\Downloads\ObjectInstantiation_Destruction\MidtermPartialAnswers\HelloWorld\HelloWorld\Player.cpp(16,2): error C2084: 'Player::Player(const Player &)' 함수에 이미 본문이 있습니다.
+C:\Users\B409_7\Downloads\ObjectInstantiation_Destruction\MidtermPartialAnswers\HelloWorld\HelloWorld\Player.h(43): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\B409_7\Downloads\ObjectInstantiation_Destruction\MidtermPartialAnswers\HelloWorld\HelloWorld\Player.cpp(18,8): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\B409_7\Downloads\ObjectInstantiation_Destruction\MidtermPartialAnswers\HelloWorld\HelloWorld\Player.cpp(18,8): error C2059: 구문 오류: '<<'
+  main.cpp
+  코드를 생성하고 있습니다...
