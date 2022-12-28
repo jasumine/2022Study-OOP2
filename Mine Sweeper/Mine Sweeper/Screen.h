@@ -16,6 +16,7 @@ class Screen
 	}
 
 public:
+	Screen();
 	Screen(int n_rows, int n_cols)
 		: n_rows(n_rows), n_cols(n_cols),
 		lines(new char[n_rows * n_cols + 1])
@@ -28,7 +29,7 @@ public:
 
 	void clear()
 	{
-		memset(lines, ' ',sizeof(char)*(n_rows * n_cols));
+		memset(lines, '-',sizeof(char)*(n_rows * n_cols));
 	}
 
 	void draw(const Position& pos, char shape)
@@ -47,10 +48,10 @@ public:
 		}
 		lines[n_rows * n_cols] = '\0';
 		
-		cout << "─────────────────" << endl;
+		cout << "───────────" << endl;
 		printf("%s", lines);
 		Sleep(100); // 0.1초 
-		cout << "─────────────────" << endl;
+		cout << "───────────" << endl;
 	}
 
 	bool checkValidPos(const Position& pos) const
@@ -66,13 +67,6 @@ public:
 			&& pos.y >= 0 && pos.y < n_cols - 1 )
 			return true;
 		 return false;
-
-
-		//int offset = pos2offset(pos.x, pos.y, n_cols);
-		//// 연산 우선순위를 보기.
-		//// ()의 조건이 true 면 false를 반환
-		//// return !(offset < 0 || offset>n_rows * n_cols);
-		//return offset >= 0 && offset <= n_rows * n_cols;
 
 	}
 };

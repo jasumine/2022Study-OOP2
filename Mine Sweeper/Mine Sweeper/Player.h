@@ -1,13 +1,16 @@
 #pragma once
 #include "GameObject.h"
 
+
 class Player :
     public GameObject
 {
 	void processInput()
 	{
+
 		int key;
 		int minor;
+		char flag = '#';
 
 		if (!_kbhit()) return; // 입력이 없으면 아무것도 하지 않겠다.
 		Borland::GotoXY(0, 25);
@@ -51,21 +54,20 @@ class Player :
 			pos.x++;
 			break;
 		case 'r':
-			&screen.draw(getPos(), 'X');
+			// 주위를 오픈하는 함수();
+			break;
+		case 'f':
+			// 깃발을 그리는 함수();
 			break;
 		}
-		setPos(pos);
+			setPos(pos);
 	}
 
 public:
-    Player(int x, int y, Screen &screen) : GameObject('>', x, y, screen) {}
+	Player(int x, int y, Screen & screen) : GameObject('>', x, y, screen) {}
 
 	void update() override 
 	{
 		processInput();
-
 	}
-
-	
 };
-

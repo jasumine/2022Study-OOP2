@@ -22,7 +22,6 @@ using namespace std;
 /// *** 코드를 최대한 보기쉽게 작성하기(코드 줄이기, 줄맞추기) ***
 /// *** 하나하나 순서대로 하기 ***
 /// 구현해야할 기능
-/// 1. 그리드(격자무늬 구분하기)
 /// 4. 깃발 표시 ( F 누를시 player position에 출력 + F 다시 누르면 깃발 없어지게 하기)
 /// 5. 남은 지뢰갯수 (cout 으로 지뢰갯수 출력)
 /// 6. 지뢰를 누를경우 게임 종료 ( R 입력 player pos == enemy pos 일경우 return 0)
@@ -49,17 +48,29 @@ using namespace std;
 int main()
 {
 	GameManager gameManager;
-	Screen screen(15, 15); // 화면의 크기
-	Player player{ 2, 4, screen }; 
+	Screen screen(11, 11); // 화면의 크기
+	Player player{ 0, 0, screen }; 
+	// 지뢰 갯수 10개
+	Enemy enemy1{ 0,0, screen };
+	Enemy enemy2{ 1,1, screen };
+	Enemy enemy3{ 2,2, screen };
+	Enemy enemy4{ 3,3, screen };
+	Enemy enemy5{ 4,4, screen };
+	Enemy enemy6{ 5,5, screen };
+	Enemy enemy7{ 6,6, screen };
+	Enemy enemy8{ 7,7, screen };
+	Enemy enemy9{ 8,8, screen };
+	Enemy enemy10{ 9,9, screen };
+
 	// ennemy 10개 랜덤 생성
-	Enemy* enemy[10];
-	srand(time(NULL));
-	int x = rand() % 9 + 1;
-	int y = rand() % 9 + 1;
-	for (int i = 0; i < 10; i++)
-	{
-		enemy[i] = new Enemy(x, y, screen);
-	}
+	//Enemy* enemy[10];
+	//srand(time(NULL));
+	//int x = rand() % 9 + 1;
+	//int y = rand() % 9 + 1;
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	enemy[i] = new Enemy(x, y, screen);
+	//}
 	int enemyCount = 10;
 
 	cout << "WASD -  이동" << endl;
@@ -74,23 +85,30 @@ while (1)
 	screen.clear(); // 화면 초기화
 
 	screen.draw(player.getPos(), player.getShape()); // player 위치
+	screen.draw(enemy1.getPos(), enemy1.getShape());
+	screen.draw(enemy2.getPos(), enemy2.getShape());
+	screen.draw(enemy3.getPos(), enemy3.getShape());
+	screen.draw(enemy4.getPos(), enemy4.getShape());
+	screen.draw(enemy5.getPos(), enemy5.getShape());
+	screen.draw(enemy6.getPos(), enemy6.getShape());
+	screen.draw(enemy7.getPos(), enemy7.getShape());
+	screen.draw(enemy8.getPos(), enemy8.getShape());
+	screen.draw(enemy9.getPos(), enemy9.getShape());
+	screen.draw(enemy10.getPos(), enemy10.getShape());
 
-	for (int i = 0; i < 10; i++)
-	{
-		screen.draw(enemy[i]->getPos(), enemy[i]->getShape()); // enemy 위치
-	}
+
 	screen.render(); 
 
 	player.update();
 
 	char key = NULL; 
 	// ============= 위치 비교 함수 ============
-	if (key == 'r')
+	/*if (key == 'r')
 	{
 		if (gameManager.comparePos(player.getPos(), enemy[i]->getPos(), ))
 			return 0;
 		else
-	}
+	}*/
 
 	//if (key == 'f')
 	//{
